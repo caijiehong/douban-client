@@ -1,0 +1,39 @@
+extends layout
+
+block head
+    script(type='text/javascript').
+        window.moduleName = 'user';
+
+block navli
+    - api.forEach(function(item){
+        li
+            a(href='#')
+                i.icon-chevron-right
+                | #{item.title}
+    - })
+
+block content
+    - api.forEach(function(item){
+        section
+            .page-header
+                h2 #{item.title}
+            p
+                code
+                    strong API
+                    |&nbsp #{item.api}
+            p
+                code
+                    strong SDK
+                    |&nbsp #{item.sdk}
+            pre.prettyprint.linenums
+                .navbar
+                    .navbar-inner
+                        form.navbar-form.pull-right(action='#{item.action}')
+                            - item.params.forEach(function(param){
+                                input(type='text',placeholder="#{param}")
+                            - })
+                            button.btn(type='submit') 试一下
+                .progress.progress-striped.active(style='width:200px;margin:0 auto;display:none')
+                    .bar(style='width:100%')
+                ol.linenums
+    - })

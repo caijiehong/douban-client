@@ -1,6 +1,6 @@
 {
     "name": "douban-client",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "douban SDK in node.js",
     "main": "index.js",
     "scripts": {

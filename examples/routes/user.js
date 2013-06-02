@@ -1,73 +1,80 @@
-var session = require('../models/session.js');
+var session = require('../models/session.js')
+    , settings = require('../settings');
 
-exports.me = {
+exports.index = {
     get: function (req, res) {
-        var client = session.get(req).getClient();
-        client.user.me().once('data', function (err, data) {
-            res.send(data);
-        })
-    }
-};
-
-exports.get = {
-    get: function (req, res, userId) {
-        var client = session.get(req).getClient();
-        client.user.get(userId).once('data', function (err, data) {
-            res.send(data);
-        });
-    }
-};
-
-exports.search = {
-    get: function (req, res, username) {
-        var client = session.get(req).getClient();
-        client.user.search(username).once('data', function (err, data) {
-            res.send(data);
-        });
-    }
-};
-
-exports.follow = {
-    get: function (req, res, userId) {
-        var client = session.get(req).getClient();
-        client.user.follow(userId).once('data', function (err, data) {
-            res.send(data);
-        });
-    }
-};
-
-exports.unfollow = {
-    get: function (req, res, userId) {
-        var client = session.get(req).getClient();
-        client.user.unfollow(userId).once('data', function (err, data) {
-            res.send(data);
-        });
-    }
-};
-
-exports.followers = {
-    get: function (req, res, userId) {
-        var client = session.get(req).getClient();
-        client.user.followers(userId).once('data', function (err, data) {
-            res.send(data);
-        });
-    }
-};
-
-exports.following = {
-    get: function (req, res, userId) {
-        var client = session.get(req).getClient();
-        client.user.following(userId).once('data', function (err, data) {
-            res.send(data);
-        });
-    }
-};
-
-exports.following = {
-    get: function (req, res, userId) {
-        var client = session.get(req).getClient();
-        client.user.following(userId).once('data', function (err, data) {
-            res.send(data);
-        });
+        var api = [
+            {
+                login: true,
+                title: '当前用户',
+                desc: '获取当前授权用户信息',
+                api: 'GET /v2/user/~me',
+                sdk: 'client.user.me()',
+                action: '/user/me',
+                params: []
+            },
+            {
+                title: '指定用户',
+                desc: '获取用户信息',
+                api: 'GET /v2/user/:name',
+                sdk: 'client.user.get(id)',
+                action: '/user/get',
+                params: [':id']
+            },
+            {
+                title: '搜索用户',
+                desc: '搜索用户',
+                api: 'GET /v2/user',
+                sdk: 'client.user.search(q)',
+                action: '/user/search',
+                params: [':q']
+            },
+            {
+                login: true,
+                title: '关注用户',
+                api: 'POST /shuo/v2/friendships/create',
+                sdk: 'client.user.follow(id)',
+                action: '/user/follow',
+                params: [':id']
+            },
+            {
+                login: true,
+                title: '取消关注',
+                api: 'POST /shuo/v2/friendships/destroy',
+                sdk: 'client.user.unfollow(id)',
+                action: '/user/unfollow',
+                params: [':id']
+            },
+            {
+                title: '粉丝信息',
+                api: 'GET /shuo/v2/users/:id/followers',
+                sdk: 'client.user.followers(id)',
+                action: '/user/followers',
+                params: [':id']
+            },
+            {
+                title: '关注信息',
+                api: 'GET /shuo/v2/users/:id/following',
+                sdk: 'client.user.following(id)',
+                action: '/user/following',
+                params: [':id']
+            },
+            {
+                title: '关注关系',
+                api: 'GET /shuo/v2/friendships/show',
+                sdk: 'client.user.friendships(target_id, source_id)',
+                action: '/user/follow',
+                params: [':target_id', ':source_id']
+            },
+            {
+                login: true,
+                title: '共同关注',
+                api: 'GET /shuo/v2/users/:id/follow_in_common',
+                sdk: 'client.user.follow_in_common(id)',
+                action: '/user/follow_in_common',
+                params: [':id']
+            }
+        ];
+        res.render('user', {api: api});
     }
 };

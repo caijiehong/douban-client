@@ -19,7 +19,7 @@ exports.doubanback = {
         client.auth_with_code(code, function (err, doubanToken) {
             if (!err) {
                 session.get(req).setDoubanToken(doubanToken);
-                res.redirect('/home/douban');
+                res.redirect('/user/index');
             }
         });
     }
@@ -36,3 +36,10 @@ exports.douban = {
             });
     }
 };
+
+exports.logout = {
+    get : function(req, res){
+        session.get(req).clear();
+        res.redirect('/user/index');
+    }
+}

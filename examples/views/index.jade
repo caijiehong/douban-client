@@ -1,20 +1,3 @@
 extends layout
 
-block head
-    script(type='text/javascript').
-        $(document).ready(function(){
-            $('#imgLogin').click(function(){
-                window.location = $('#hidAuthUrl').val();
-            });
-        });
-
-block content
-    .hero-unit
-        h1 欢迎！
-        p
-            | 这是我基于我的
-            a(hre='#') 豆瓣node.js SDK
-            | 所做的一个样例站点
-        p
-            img#imgLogin(src='/img/login_with_douban_32.png',style='cursor:pointer')
-            input#hidAuthUrl(type='hidden', value='#{authorize_url}')
+block navli

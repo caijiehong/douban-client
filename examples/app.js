@@ -30,12 +30,19 @@ app.configure(function () {
 
 app.configure('development', function () {
     app.use(express.errorHandler());
-    app.locals.pretty = true;
+    //app.locals.pretty = true;
 });
 
 
 function urlRouter(req, res, controller, action, id, ispost) {
-    res.locals.doubanClient = session.get(req).getClient();
+    var ses = session.get(req);
+    res.locals.doubanToken = ses.doubanToken;
+    res.locals.authorize_url = ses.getClient().authorize_url();
+    res.locals.testUserId1 = settings.testUserId1;
+    res.locals.testUsername1 = settings.testUsername1;
+    res.locals.testUserId2 = settings.testUserId2;
+    res.locals.testUsername2 = settings.testUsername2
+    res.locals.loginUserId = ses.doubanToken ? ses.doubanToken.douban_user_id : '';
 
     controller = controller || 'home';
     action = action || 'index';
@@ -58,8 +65,16 @@ function urlRouter(req, res, controller, action, id, ispost) {
             var client = session.get(req).getClient();
 
             if (client[controller] && client[controller][action]) {
-                console.log('start', req.url);
-                client[controller][action](id).once('data', function (err, data) {
+
+                var temp = client[controller];
+                var params = [];
+                for (var i = 0; i < 6; i++) {
+                    var value = req.body['p' + i];
+                    if (value == undefined)break;
+                    params[i] = value;
+                }
+
+                temp[action].apply(temp, params).once('data', function (err, data) {
                     res.send(data);
                 });
             }

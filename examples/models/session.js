@@ -12,7 +12,8 @@ exports.get = function (req) {
         var cst = ses.constructor;
 
         cst.prototype.clear = function () {
-            this._doubanClient = null;
+            delete clientInSession[this.id];
+            delete this.doubanToken;
         };
 
         cst.prototype.getClient = function () {

@@ -27,6 +27,7 @@ function User(token, apiKey) {
         return this._get('/shuo/v2/users/' + id + '/followers', { start: start || this.DEFAULT_START, count: count || this.DEFAULT_COUNT});
     };
 
+    //关注信息
     base.following = function (id, start, count) {
         return this._get('/shuo/v2/users/' + id + '/following', { start: start || this.DEFAULT_START, count: count || this.DEFAULT_COUNT});
     };

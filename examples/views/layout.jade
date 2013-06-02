@@ -1,0 +1,60 @@
+!!! transitional
+html
+    head
+        meta(charset='utf-8')
+        title #{title}
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet', href='../css/bootstrap.min.css')
+        style(type='text/css').
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        link(href='../css/bootstrap-responsive.min.css', rel='stylesheet')
+        script(src='/js/jquery-2.0.2.min.js')
+        script(src='/js/bootstrap.min.js')
+        block head
+    body
+        .navbar.navbar-inverse.navbar-fixed-top
+            .navbar-inner
+                .container
+                    button.btn.btn-navbar(type='button', data-toggle='collapse', data-target='.nav-collapse')
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.brand(href='/') douban sdk
+                    .nav-collapse.collapse
+                        - if(doubanClient.user)
+                            p.navbar-text.pull-right login as &nbsp
+                                a.navbar-link(href='http://www.douban.com/people/#{doubanClient.user.userId}/',target='blank') #{doubanClient.user.username}
+                        ul.nav
+                            li.active
+                                a(href='#') Home
+                            li
+                                a(href='#about') About
+                            li
+                                a(href='#contact') Contact
+                            li.dropdown
+                                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                    | Dropdown
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href='#') Action
+                                    li
+                                        a(href='#') Another action
+                                    li
+                                        a(href='#') Something else here
+                                    li.divider
+                                    li.nav-header Nav header
+                                    li
+                                        a(href='#') Separated link
+                                    li
+                                        a(href='#') One more separated link
+        .container
+            block content
+            hr
+            footer
+                p
+                    ©&nbsp
+                    a(href='https://github.com/caijiehong/', target='_blank') caijiehong | 2013

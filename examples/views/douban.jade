@@ -20,21 +20,38 @@ block head
     script(type='text/javascript', src='/js/douban.js')
 
 block content
+    input#hidTestUserId1(type='hidden', value='#{testUserId1}')
+    input#hidTestUserId2(type='hidden', value='#{testUserId2}')
+    input#hidTestUsername1(type='hidden', value='#{testUsername1}')
+    input#hidTestUsername2(type='hidden', value='#{testUsername2}')
     .row-fluid
         .span3
             .wel.sidebar-nav
                 ul#ulLink.nav.nav-list
                     li.nav-header 用户
                     li.active
-                        a(href='#/user/me') 获取当前授权用户信息
+                        a(href='/user/me') 当前用户
                     li
-                        a(href='#/user/get/#{testUserId}') 获取用户信息
+                        a(href='/user/get/:id') 指定用户
                     li
-                        a(href='#/user/search/#{testUsername}') 搜索用户
+                        a(href='/user/search/:name') 搜索用户
                     li
-                        a(href='#/user/follow/#{testUserId}') 关注用户
+                        a(href='/user/follow/:id') 关注用户
                     li
-                        a(href='#/user/followers/#{testUserId}') 关注用户
+                        a(href='/user/unfollow/:id') 取消关注
+                    li
+                        a(href='/user/followers/:id') 粉丝信息
+                    li
+                        a(href='/user/following/:id') 关注信息
+                    li
+                        a(href='/user/friendships?p1=:id&p2=:id2') 关注关系
+                    li
+                        a(href='/user/follow_in_common/:id') 共同关注
+                    li.nav-header 广播
+                    li
+                        a(href='/miniblog/home_timeline') 当前用户Timeline
+                    li
+                        a(href='/miniblog/user_timeline/:id2') 指定用户Timeline
         .span9
             .hero-unit
                 p#pContent(style='font-size:12px')

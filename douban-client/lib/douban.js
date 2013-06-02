@@ -1,6 +1,5 @@
 var Client = require('./api/auth2Client')
-    , Access_token = require('./api/access_token')
-    , User = require('./api/user');
+    , Access_token = require('./api/access_token');
 
 var API_HOST = 'api.douban.com';
 var AUTH_HOST = 'www.douban.com';
@@ -13,7 +12,6 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
     var _scope = scope;
     var client = new Client(key, secrect, AUTH_HOST, API_HOST, AUTHORIZE_URL, TOKEN_URL);
     var access_token = null;
-    this.user = null;
     var _this = this;
     this.doubanToken = null;
 
@@ -43,7 +41,9 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
     this.loadFromDoubanToken = loadFromDoubanToken = function (doubanToken, token, expires, refreshToken, userId, username) {
         _this.doubanToken = doubanToken;
         access_token = new Access_token(doubanToken.access_token, doubanToken.expires_in, doubanToken.refresh_token);
-        _this.user = new User(access_token, _apiKey);
+        _this.user = new require('./api/user')(access_token, _apiKey);
+        _this.miniblog = new require('./api/miniblog')(access_token, _apiKey);
+
     }
 
     return this;

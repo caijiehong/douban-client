@@ -1,10 +1,23 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-    $('#ulLink a').click(function(){
-       var href = $(this).attr('href').replace('#', '');
+    $('#ulLink a').click(function () {
+        var testUserId1 = $('#hidTestUserId1').val();
+        var testUserId2 = $('#hidTestUserId2').val();
+        var testUsername1 = $('#hidTestUsername1').val();
+        var testUsername2 = $('#hidTestUsername2').val();
+
+        var href = $(this).attr('href')
+            .replace(':id2', testUserId2)
+            .replace(':id', testUserId1)
+            .replace(':name2', testUsername2)
+            .replace(':name', testUsername1);
+
         $('#ulLink .active').removeClass('active');
         $(this).parent().addClass('active');
-        $.get(href,function(data){
+
+        $('#pContent').empty();
+
+        $.get(href, function (data) {
             $('#pContent').html(json2list(JSON.parse(data)));
         });
         return false;
@@ -85,7 +98,7 @@ function typeOf(value) {
 function isFalse(value) {
     var i, s = true, t = typeof value;
     if (value !== null && t === 'object')
-        for(i in value) return false; //如果对象是可枚举的
+        for (i in value) return false; //如果对象是可枚举的
     else if (t === 'function')
         return isFalse(value()); //依据函数的返回值判定
     else

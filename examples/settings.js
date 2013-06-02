@@ -5,9 +5,9 @@ module.exports = {
     scope: 'shuo_basic_r,shuo_basic_w,douban_basic_common',
     dbUrl: 'mongodb://127.0.0.1:27017/douban',
     cookie_secret: 'cookie_secret',
-    testUserId1: 'ahbei',
-    testUsername1: '阿北',
-    testUserId2: 'staybird',
-    testUsername2: 'straybird'
+    testUserId2: 'ahbei',
+    testUsername2: '阿北',
+    testUserId1: 'staybird',
+    testUsername1: 'straybird'
 
 }

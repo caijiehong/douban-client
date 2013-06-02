@@ -47,12 +47,22 @@ function urlRouter(req, res, controller, action, id, ispost) {
             ctr = controllers[controller] = require('./routes/' + controller);
         }
 
-        if (ctr[action].needLogin && !req.session.user) {
-            res.redirect('/home/login');
-        } else if (ispost) {
-            ctr[action].post(req, res, id);
+        if (ctr[action]) {
+            if (ispost) {
+                ctr[action].post(req, res, id);
+            } else {
+                ctr[action].get(req, res, id);
+            }
         } else {
-            ctr[action].get(req, res, id);
+            console.log('start', req.url);
+            var client = session.get(req).getClient();
+
+            if (client[controller] && client[controller][action]) {
+                console.log('start', req.url);
+                client[controller][action](id).once('data', function (err, data) {
+                    res.send(data);
+                });
+            }
         }
     } catch (err) {
         console.error(err.stack);

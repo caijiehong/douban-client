@@ -1,5 +1,5 @@
 var settings = require('../settings')
-    , DoubanClient = require('doubanSDK');
+    , DoubanClient = require('../../douban-client');
 
 var clientInSession = {};
 

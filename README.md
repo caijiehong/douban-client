@@ -173,3 +173,24 @@ __日记 Note__
 
 ```
 <http://developers.douban.com/wiki/?title=doumail_v2>
+
+
+__相册 Album__
+```
+# 以下 id 指相册数字 id
+# desc 描述文字
+获取一个相册 client.album.get(id)
+新建一个相册 client.album.new(title, desc)
+更新一个相册 client.album.update(id, title, desc)
+删除一个相册 client.album.delete(id)
+
+获取用户相册列表 client.album.list(user_id, start, count)
+用户喜欢相册列表 client.album.liked_list(user_id, start, count)
+获取相册图片列表 client.album.photos(id, start, count)
+
+喜欢一个相册 client.album.like(id)
+取消喜欢相册 client.album.unlike(id)
+
+```
+<http://developers.douban.com/wiki/?title=photo_v2#get_album>
+

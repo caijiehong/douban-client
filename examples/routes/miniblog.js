@@ -96,7 +96,7 @@ var api = [
     {
         login: true,
         title: '取消赞',
-        api: 'DELETE /shuo/v2/statuses/:id/unlike',
+        api: 'DELETE /shuo/v2/statuses/:id/like',
         sdk: 'client.miniblog.unlike(id)',
         action: '/miniblog/unlike',
         params: [':id']
@@ -127,7 +127,7 @@ var api = [
 
 exports.index = {
     get: function (req, res) {
-        res.render('miniblog', {api: api});
+        res.render('layout', {api: api, moduleName: 'miniblog'});
     }
 };
 

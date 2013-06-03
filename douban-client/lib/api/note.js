@@ -30,7 +30,7 @@ function Note(token) {
 
     //取消喜欢一篇日记
     base.unlike = function (id) {
-        return this._delete('/v2/note/' + id + '/unlike');
+        return this._delete('/v2/note/' + id + '/like');
     };
 
     //获取用户日记列表

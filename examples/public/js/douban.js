@@ -3,7 +3,6 @@ var testUserId1 = '';
 var testUserId2 = '';
 var testUsername1 = '';
 var testUsername2 = '';
-var moduleName = 'user';
 
 $(document).ready(function () {
     loginUserId = $('#hidLoginUserId').val();
@@ -11,8 +10,8 @@ $(document).ready(function () {
     testUserId2 = $('#hidTestUserId2').val();
     testUsername1 = $('#hidTestUsername1').val();
     testUsername2 = $('#hidTestUsername2').val();
-
-    $('#ulNav .'+ moduleName).addClass('active');
+    var moduleName = $('#hidModule').val();
+    $('#ulNav .' + moduleName).addClass('active');
 
     $(':text').each(function () {
         var placeholder = $(this).attr('placeholder');
@@ -70,9 +69,12 @@ $(document).ready(function () {
             $('#ulLink .active').removeClass('active');
             $(this).parent().css('active');
         });
-        item.click(function(){
+        item.click(function () {
             $('#ulLink .active').removeClass('active');
             $(this).parent().addClass('active');
+            setTimeout(function () {
+                window.scrollBy(0, -80);
+            }, 10);
         });
 
     });

@@ -73,6 +73,6 @@ var api = [
 
 exports.index = {
     get: function (req, res) {
-        res.render('user', {api: api});
+        res.render('layout', {api: api, moduleName: 'user'});
     }
 };

@@ -5,6 +5,7 @@ html
         title #{title}
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         link(rel='stylesheet', href='../css/bootstrap.min.css')
+
         style(type='text/css').
             body {
                 padding-top: 60px;
@@ -57,7 +58,7 @@ html
             ol.linenums li span{
                 color:#1e347b;
             }
-        block head
+
         link(href='../css/bootstrap-responsive.min.css', rel='stylesheet')
         script(src='/js/jquery-2.0.2.min.js')
         script(src='/js/bootstrap.min.js')
@@ -90,6 +91,8 @@ html
                                 a(href='/doumail/index') 豆邮
                             li.note
                                 a(href='/note/index') 日记
+                            li.album
+                                a(href='/album/index') 相册
         .container
             .row
                 .span3.bs-docs-sidebar
@@ -136,3 +139,5 @@ html
     input#hidTestUsername1(type='hidden', value='#{testUsername1}')
     input#hidTestUsername2(type='hidden', value='#{testUsername2}')
     input#hidLoginUserId(type='hidden', value='#{loginUserId}')
+    input#hidModule(type='hidden', value='#{moduleName}')
+

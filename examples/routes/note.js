@@ -43,7 +43,7 @@ var api = [
     {
         login: true,
         title: '取消喜欢一篇日记',
-        api: 'DELETE /v2/note/:id/unlike',
+        api: 'DELETE /v2/note/:id/like',
         sdk: 'client.note.unlike(id)',
         action: '/note/unlike',
         params: [':id']
@@ -96,7 +96,7 @@ var api = [
 
 exports.index = {
     get: function (req, res) {
-        res.render('note', {api: api});
+        res.render('layout', {api: api, moduleName: 'note'});
     }
 };
 

@@ -19,8 +19,8 @@ exports.get = function (req) {
         cst.prototype.getClient = function () {
             var client = clientInSession[this.id];
             if (!client) {
-                var redirect_uri = 'http://' + settings.hostname + '/home/doubanback';
-                client = new DoubanClient(settings.doubanApiKey, settings.doubanSecret, redirect_uri, settings.scope);
+                var redirect_uri = 'http://' + settings.hostname;
+                client = new DoubanClient(settings.doubanApiKey, settings.doubanSecret, redirect_uri, settings.scopes.join(','));
                 clientInSession[this.id] = client;
 
                 if(this.doubanToken){

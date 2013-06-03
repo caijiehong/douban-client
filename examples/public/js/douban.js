@@ -12,6 +12,8 @@ $(document).ready(function () {
     testUsername1 = $('#hidTestUsername1').val();
     testUsername2 = $('#hidTestUsername2').val();
 
+    $('#ulNav .'+ moduleName).addClass('active');
+
     $(':text').each(function () {
         var placeholder = $(this).attr('placeholder');
         switch (placeholder) {
@@ -33,6 +35,7 @@ $(document).ready(function () {
         item.attr('id', 'section' + index);
         if (item.hasClass('login') && !loginUserId) {
             item.find('ol.linenums').html('<div class="alert alert-error">请先登录!</div>');
+            item.find('button').attr('disabled', true);
         } else {
             item.find('form').submit(function () {
                 var url = $(this).attr('action');
@@ -66,6 +69,10 @@ $(document).ready(function () {
         item.attr('href', '#section' + index).click(function () {
             $('#ulLink .active').removeClass('active');
             $(this).parent().css('active');
+        });
+        item.click(function(){
+            $('#ulLink .active').removeClass('active');
+            $(this).parent().addClass('active');
         });
 
     });

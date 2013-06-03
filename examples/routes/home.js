@@ -3,11 +3,20 @@ var session = require('../models/session.js')
 
 exports.index = {
     get: function (req, res) {
-        var client = session.get(req).getClient();
+        var code = req.param('code');
+        if (code) {
+            var client = session.get(req).getClient();
 
-        var authorize_url = client.authorize_url();
-
-        res.render('index', {authorize_url: authorize_url});
+            client.auth_with_code(code, function (err, doubanToken) {
+                if (!err) {
+                    session.get(req).setDoubanToken(doubanToken);
+                    res.redirect('/user/index');
+                }
+            });
+        }
+        else {
+            res.redirect('/user/index');
+        }
     }
 };
 
@@ -38,7 +47,7 @@ exports.douban = {
 };
 
 exports.logout = {
-    get : function(req, res){
+    get: function (req, res) {
         session.get(req).clear();
         res.redirect('/user/index');
     }

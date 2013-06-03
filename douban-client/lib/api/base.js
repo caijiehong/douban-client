@@ -14,7 +14,7 @@ function DoubanApiBase(token, apiKey) {
             eve.emit('data', err, data);
         });
         return eve;
-    }
+    };
 
     this._post = function (path, query, postdata) {
         var eve = new events.EventEmitter();
@@ -22,7 +22,7 @@ function DoubanApiBase(token, apiKey) {
             eve.emit('data', err, data);
         });
         return eve;
-    }
+    };
 
     this._delete = function (path, query) {
         var eve = new events.EventEmitter();
@@ -30,7 +30,16 @@ function DoubanApiBase(token, apiKey) {
             eve.emit('data', err, data);
         });
         return eve;
-    }
+    };
+
+
+    this._put = function (path, query, postdata) {
+        var eve = new events.EventEmitter();
+        this.token.put(DOUBAN_HOSTNAME, path, query, postdata, function (err, data) {
+            eve.emit('data', err, data);
+        });
+        return eve;
+    };
 
     return this;
 }

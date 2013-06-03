@@ -71,7 +71,7 @@ Access_token.prototype.post = function (hostname, path, query, postdata, onrecie
     req.end();
 };
 
-Access_token.prototype.delete = function(hostname, path, query, onrecieve){
+Access_token.prototype.delete = function (hostname, path, query, onrecieve) {
     var options = {
         hostname: hostname,
         path: url.format({pathname: path, query: query}),
@@ -98,6 +98,37 @@ Access_token.prototype.delete = function(hostname, path, query, onrecieve){
 
     req.end();
 
+}
+
+Access_token.prototype.put = function (hostname, path, query, postdata, onrecieve) {
+    var post = querystring.stringify(postdata);
+
+    var options = {
+        hostname: hostname,
+        path: url.format({pathname: path, query: query}),
+        method: 'PUT',
+        headers: {
+            'Authorization': 'Bearer ' + this.token,
+            'Content-Type': "application/x-www-form-urlencoded",
+            'content-length': Buffer.byteLength(post)
+        }
+    };
+
+    var revData = '';
+    var req = https.request(options, function (res) {
+        res.on('data', function (d) {
+            revData += d.toString('utf8');
+        });
+        res.on('end', function () {
+            onrecieve(null, revData);
+        });
+    });
+    req.on('error', function (e) {
+        onrecieve(e, null);
+    });
+
+    req.write(post);
+    req.end();
 }
 
 module.exports = Access_token;

@@ -105,5 +105,5 @@ exports.start = function () {
 
     var server = require('http').createServer(app);
 
-    server.listen(3000);
+    server.listen(settings.serverPort);
 }

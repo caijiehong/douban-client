@@ -81,18 +81,51 @@ html
                             - else
                                 li
                                     a(href='#{authorize_url}',style='background-image:url(/img/login_with_douban_24.png);background-repeat:no-repeat;width:120px;height:24px')
-                        ul.nav
-                            li
-                                a.user(href='/user/index') 用户
-                            li
-                                a.miniblog(href='/miniblog/index') 广播
+                        ul#ulNav.nav
+                            li.user
+                                a(href='/user/index') 用户
+                            li.miniblog
+                                a(href='/miniblog/index') 广播
+                            li.doumail
+                                a(href='/doumail/index') 豆邮
+                            li.note
+                                a(href='/note/index') 日记
         .container
             .row
                 .span3.bs-docs-sidebar
                     ul#ulLink.nav.nav-list.bs-docs-sidenav.affix(style='min-width:150px')
-                        block navli
+                        - api.forEach(function(item){
+                            li
+                                a(href='#')
+                                    i.icon-chevron-right
+                                    | #{item.title}
+                        - })
                 .span9
-                    block content
+                    - api.forEach(function(item){
+                    -    var loginclass = item.login ? 'login' : '';
+                        section(class=loginclass)
+                            .page-header
+                                h2 #{item.title}
+                            p
+                                code
+                                    strong API
+                                    |&nbsp #{item.api}
+                            p
+                                code
+                                    strong SDK
+                                    |&nbsp #{item.sdk}
+                            pre.prettyprint.linenums
+                                .navbar
+                                    .navbar-inner
+                                        form.navbar-form.pull-right(action='#{item.action}')
+                                            - item.params.forEach(function(param){
+                                                input(type='text',placeholder="#{param}")
+                                            - })
+                                            button.btn(type='submit') 试一下
+                                .progress.progress-striped.active(style='width:200px;margin:0 auto;display:none')
+                                    .bar(style='width:100%')
+                                ol.linenums
+                    - })
     footer.footer
         .container
             ul.footer-links

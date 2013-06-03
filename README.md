@@ -194,3 +194,166 @@ __相册 Album__
 ```
 <http://developers.douban.com/wiki/?title=photo_v2#get_album>
 
+
+
+__图片 Photo__
+```
+# 以下 id 指图片数字 id
+获取一张图片 client.photo.get(id)
+上传一张图片 client.photo.new(album_id, image, desc) # image = open('/path/pic.png')
+更新图片描述 client.photo.update(id, desc)     # desc 为描述文字
+删除一条图片 client.photo.delete(id)
+
+喜欢一张图片 client.photo.like(id)
+取消喜欢图片 client.photo.unlike(id)
+
+获取回复列表  client.photo.comments(id, start, count)
+新加一条回复  client.photo.comment.new(id, content)
+获取一条回复  client.photo.comment.get(comment_id)
+删除一条回复  client.photo.comment.delete(comment_id)
+```
+<http://developers.douban.com/wiki/?title=photo_v2#get_photo>
+
+
+
+__读书 Book__
+```
+# 以下 id 指图书条目数字 id
+# q: 关键词, tag: 标签
+获取一本图书信息 client.book.get(id)
+通过isbn获取信息 client.book.isbn(isbn_number)
+搜索图书信息     client.book.search(q, tag, start, count)
+
+获取图书标签 client.book.tags(id)
+获取用户标签 client.book.tagged_list(user_id)
+
+发表一条书评 client.book.review.new(id, title, content)
+更新一条书评 client.book.review.update(review_id, title, content)
+删除一条书评 client.book.review.delete(review_id)
+
+```
+<http://developers.douban.com/wiki/?title=book_v2>
+
+
+
+__电影 Movie__
+```
+# 以下 id 指电影条目数字 id
+# q: 关键词, tag: 标签
+获取一部电影信息 client.movie.get(id)
+获取影人信息 client.movie.celebrity(celebrity_id)
+获取影人作品信息 client.movie.celebrity_works(celebrity_id)
+通过imdb获取电影 client.movie.imdb(imdb_number)
+搜索电影信息     client.movie.search(q, tag, start, count)
+
+获取电影标签 client.movie.tags(id)
+获取用户标签 client.movie.tagged_list(user_id)
+
+发表一条影评 client.movie.review.new(id, title, content)
+更新一条影评 client.movie.review.update(review_id, title, content)
+删除一条影评 client.movie.review.delete(review_id)
+
+```
+<http://developers.douban.com/wiki/?title=movie_v2>
+
+
+
+__音乐 Music__
+```
+# 以下 id 指音乐条目数字 id
+# q: 关键词, tag: 标签
+获取音乐信息 client.music.get(id)
+搜索音乐信息 client.music.search(q, tag, start, count)
+
+获取音乐标签 client.music.tags(id)
+获取用户标签 client.music.tagged_list(user_id)
+
+发表一条乐评 client.music.review.new(id, title, content)
+更新一条乐评 client.music.review.update(review_id, title, content)
+删除一条乐评 client.music.review.delete(review_id)
+
+```
+<http://developers.douban.com/wiki/?title=music_v2>
+
+
+
+__线上活动 Online__
+```
+# 以下 id 指线上活动数字 id
+# begin_time, end_time 格式为 '%Y-%m-%d %H:%M:%S'
+# cate 可选值: day, week, latest
+获取一条线上活动 client.online.get(id)
+发表一条线上活动 client.online.new(title, desc, begin_time, end_time)
+更新一条线上活动 client.online.update(title, desc, begin_time, end_time)
+删除一条线上活动 client.online.delete(id)
+
+参加一条线上活动 client.online.join(id)
+取消参加线上活动 client.online.quit(id)
+
+喜欢一条线上活动 client.online.like(id)
+取消喜欢线上活动 client.online.unlike(id)
+
+获取线上活动图片列表 client.online.photos(id, start, count)
+上传图片到线上活动   client.online.upload(id, image) # image = open('xxx.jpg')
+
+获取线上活动讨论列表 client.online.discussions(id, start, count)
+在线上活动新发讨论   client.online.discussion.new(id, title, content)
+
+获取参加线上活动成员列表 client.online.participants(id, start, count)
+
+获取线上活动列表 client.online.list(cate, start, end)
+获取参加过的活动 client.online.joined(user_id, start, count)
+获取创建过的活动 client.online.created(user_id, start, count)
+
+```
+<http://developers.douban.com/wiki/?title=online_v2>
+
+
+
+__同城活动 Event__
+```
+# 以下 id 指同城活动 id
+# q: 关键词, loc: 城市
+# day_type: future, week, weekend, today, tomorrow
+# type: all,music, film, drama, commonweal, salon, \
+#       exhibition, party, sports, travel, others
+获取同城活动 client.event.get(id)
+搜索同城活动 client.event.search(q, loc, start, count)
+
+参加同城活动 client.event.join(id)
+取消参加活动 client.event.quit(id)
+
+对同城活动感兴趣 client.event.wish(id)
+取消同城活动兴趣 client.event.unwish(id)
+
+某同城活动参加者   client.event.participants(id, start, count)
+某同城活动感兴趣者 client.event.wishers(id, start, count)
+
+获取用户创建过的同城活动 client.event.owned(user_id, start, count)
+获取用户参加过的同城活动 client.event.participated(user_id, start, count)
+获取用户感兴趣的同城活动 client.event.wished(user_id, start, count)
+
+获取同城活动列表 client.event.list(loc, day_type, type, start, count)
+```
+<http://developers.douban.com/wiki/?title=event_v2>
+
+
+
+__论坛 Discussion__
+```
+# 以下 id 指论坛帖子 id
+# target 指相应产品线（如 online, review 等）
+# target_id 指相应产品 id
+获取帖子 client.discussion.get(id)
+发表帖子 client.discussion.new(target, target_id, title, content)
+更新帖子 client.discussion.update(id, title, content)
+删除帖子 client.discussion.delete(id)
+
+获取帖子列表 client.discussion.list(target, target_id)
+
+获取回复列表 client.discussion.comments(id, start, count)
+新加一条回复 client.discussion.comment.new(id, content)
+获取某条回复 client.discussion.comment.get(comment_id)
+删除某条回复 client.discussion.comment.delete(comment_id)
+```
+<http://developers.douban.com/wiki/?title=discussion_v2>

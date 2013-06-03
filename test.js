@@ -1,4 +1,5 @@
-var querystring = require('querystring');
-var post_data = querystring.stringify(null);
-
-console.log(Buffer.byteLength(post_data))
+process.stdout.write('this is good');
+process.stdin.resume();
+process.stdin.on('data', function(chunk) {
+    process.stdout.write('data: ' + chunk);
+});

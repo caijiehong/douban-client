@@ -3,53 +3,43 @@ var DoubanApiBase = require('./base');
 function Book(token) {
     var base = new DoubanApiBase(token);
 
-    //获取一张图片
+    //获取一本图书信息
     base.get = function (id) {
-        return this._get('/v2/photo/' + id);
+        return this._get('/v2/book/' + id);
     };
 
-    //上传一张图片
-    base.new = function (album_id, image, desc) {
-        return this._post('/v2/album/' + album_id, null, {desc: desc, image: image});
+    //通过isbn获取信息
+    base.isbn = function (isbn_number) {
+        return this._get('/v2/book/isbn/' + album_id);
     };
 
-    //更新图片描述
-    base.update = function (id, desc) {
-        return this._put('/v2/photo/' + id, null, {desc: desc});
+    //通过isbn获取信息
+    base.search = function (q, tag, start, count) {
+        return this._get('/v2/book/search', {q: q, tag: tag, start: (start || this.DEFAULT_START), count: (count || this.DEFAULT_COUNT)});
     };
 
-    //删除一张图片
-    base.delete = function (id) {
-        return this._delete('/v2/photo/' + id);
+    //获取图书标签
+    base.tags = function (id) {
+        return this._get('/v2/book/' + id + '/tags');
     };
 
-    //喜欢一张图片
-    base.like = function (id) {
-        return this._post('/v2/photo/' + id + '/like');
+    //获取用户标签
+    base.tagged_list = function (user_id) {
+        return this._get('/v2/book/user_tags/' + user_id);
     };
 
-    //取消喜欢一张图片
-    base.unlike = function (id) {
-        return this._delete('/v2/photo/' + id + '/like');
-    };
-
-    //获取回复列表
-    base.comments = function (id, start, count) {
-        return this._get('/v2/photo/' + id + '/comments', {start: start || this.DEFAULT_START, count: count || this.DEFAULT_COUNT});
-    };
-
-    base.comment = {
-        //新加一条回复
-        'new': function (id, text) {
-            return base._post('/v2/photo/' + id + '/comments', null, {text: text});
+    base.review = {
+        //发表一条书评
+        'new': function (bookId, title, content) {
+            return base._post('/v2/book/reviews', null, {book: bookId, title: title, content: content});
         },
-        //获取一条回复
-        'get': function (id, comment_id) {
-            return base._get('/v2/photo/' + id + '/comment/' + comment_id);
+        //更新一条书评
+        'update': function (review_id, title, content) {
+            return base._put('/v2/book/review/' + review_id, {title: title, content: content});
         },
-        //删除一条回复
-        'delete': function (id, comment_id) {
-            return base._delete('/v2/photo/' + id + '/comment/' + comment_id);
+        //删除一条书评
+        'delete': function (review_id) {
+            return base._delete('/v2/book/review/' + review_id);
         }
     };
 

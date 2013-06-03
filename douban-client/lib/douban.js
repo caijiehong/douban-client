@@ -41,11 +41,19 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
     this.loadFromDoubanToken = loadFromDoubanToken = function (doubanToken, token, expires, refreshToken, userId, username) {
         _this.doubanToken = doubanToken;
         access_token = new Access_token(doubanToken.access_token, doubanToken.expires_in, doubanToken.refresh_token);
-        _this.user = new require('./api/user')(access_token, _apiKey);
-        _this.miniblog = new require('./api/miniblog')(access_token, _apiKey);
-        _this.doumail = new require('./api/doumail')(access_token, _apiKey);
-        _this.note = new require('./api/note')(access_token, _apiKey);
+
         _this.album = new require('./api/album')(access_token, _apiKey);
+        _this.book = new require('./api/book')(access_token, _apiKey);
+        _this.discussion = new require('./api/discussion')(access_token, _apiKey);
+        _this.doumail = new require('./api/doumail')(access_token, _apiKey);
+        _this.event = new require('./api/event')(access_token, _apiKey);
+        _this.miniblog = new require('./api/miniblog')(access_token, _apiKey);
+        _this.movie = new require('./api/movie')(access_token, _apiKey);
+        _this.music = new require('./api/music')(access_token, _apiKey);
+        _this.note = new require('./api/note')(access_token, _apiKey);
+        _this.online = new require('./api/online')(access_token, _apiKey);
+        _this.photo = new require('./api/photo')(access_token, _apiKey);
+        _this.user = new require('./api/user')(access_token, _apiKey);
     }
 
     return this;

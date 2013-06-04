@@ -1,8 +1,8 @@
 module.exports = {
     doubanApiKey: '0ce9be6dea250deb26bd3b49be6f29c1',
     doubanSecret: 'a3910895fc66a70f',
-    hostname: 'www.test.com',
-    serverPort: 80,
+    hostname: 'doubannode.duapp.com',
+    serverPort: process.env.APP_PORT || 80,
     scopes: [
         'shuo_basic_r',
         'shuo_basic_w',
@@ -23,11 +23,12 @@ module.exports = {
         'event_basic_r',
         'event_basic_w'
     ],
-    dbUrl: 'mongodb://127.0.0.1:27017/douban',
+    dbUrl: process.env.BAE_ENV_ADDR_SQL_IP ? ('mongodb://' + process.env.BAE_ENV_ADDR_SQL_IP + ':' +
+        '/jpyMEvkVvrgATYOVowzO') : 'mongodb://127.0.0.1:27017/douban',
     cookie_secret: 'cookie_secret',
     testUserId2: 'ahbei',
     testUsername2: '阿北',
-    testUserId1: 'staybird',
+    testUserId1: '2477477',
     testUsername1: 'straybird'
 
 }

@@ -16,12 +16,12 @@ $(document).ready(function () {
     $(':text').each(function () {
         var placeholder = $(this).attr('placeholder');
         switch (placeholder) {
-            case ':id':
+            case ':user_id':
             {
                 $(this).val(testUserId1);
                 return;
             }
-            case ':name':
+            case ':user_name':
             {
                 $(this).val(testUsername1);
                 return;

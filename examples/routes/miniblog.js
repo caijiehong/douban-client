@@ -51,7 +51,7 @@ var api = [
         login: true,
         title: '推荐网址',
         api: 'POST /shuo/v2/statuses/',
-        sdk: 'client.miniblog.rec(title, url, desc, image=\'\')',
+        sdk: "client.miniblog.rec(title, url, desc, image='')",
         action: '/miniblog/rec',
         params: [':title', ':url', ':desc']
     },

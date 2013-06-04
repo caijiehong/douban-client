@@ -66,22 +66,22 @@ function Online(token) {
     };
 
     //获取参加线上活动成员列表
-    base.participants = function(id, start, count){
+    base.participants = function (id, start, count) {
         return this._get('/v2/online/' + id + '/participants', {start: start || this.DEFAULT_START, count: count || this.DEFAULT_COUNT })
     };
 
     //获取线上活动列表
-    base.list = function(cate, start, end){
-        return this._get('/v2/onlines', {cate:cate,start: start, end: end})
+    base.list = function (cate, start, end) {
+        return this._get('/v2/onlines', {cate: cate, start: start, end: end})
     };
 
     //获取参加过的活动
-    base.joined = function(user_id, start, count){
+    base.joined = function (user_id, start, count) {
         return this._get('/v2/online/user_participated/' + user_id, {start: start || this.DEFAULT_START, count: count || this.DEFAULT_COUNT })
     };
 
     //获取创建过的活动
-    base.created = function(user_id, start, count){
+    base.created = function (user_id, start, count) {
         return this._get('/v2/online/user_created/' + user_id, {start: start || this.DEFAULT_START, count: count || this.DEFAULT_COUNT })
     };
 

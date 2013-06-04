@@ -19,7 +19,7 @@ var api = [
     {
         login: true,
         title: '更新一个相册',
-        api: 'PUT /v2/album/:id/',
+        api: 'PUT /v2/album/:id',
         sdk: 'client.album.update(id, title, desc, order="desc", privacy="public")',
         action: '/album/update',
         params: [':id', ':title', ':desc']
@@ -50,17 +50,17 @@ var api = [
     },
     {
         title: '获取用户相册列表',
-        api: 'GET /v2/album/user_created/:id',
-        sdk: 'client.album.list(id)',
+        api: 'GET /v2/album/user_created/:user_id',
+        sdk: 'client.album.list(user_id)',
         action: '/album/list',
-        params: [':id']
+        params: [':user_id']
     },
     {
         title: '获取喜欢的相册列表',
-        api: 'GET /v2/album/user_liked/:id',
-        sdk: 'client.album.liked_list(id)',
+        api: 'GET /v2/album/user_liked/:user_id',
+        sdk: 'client.album.liked_list(user_id)',
         action: '/album/liked_list',
-        params: [':id']
+        params: [':user_id']
     },
     {
         title: '获取相册图片列表',

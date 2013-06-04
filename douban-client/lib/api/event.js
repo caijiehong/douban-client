@@ -38,7 +38,7 @@ function Event(token) {
         return this._delete('/v2/event/' + id + '/wishers');
     };
 
-    //获取参加线上活动成员列表
+    //某同城活动参加者
     base.participants = function (id, start, count) {
         return this._get('/v2/event/' + id + '/participants', {start: start || this.DEFAULT_START, count: count || this.DEFAULT_COUNT })
     };

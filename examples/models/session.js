@@ -19,18 +19,18 @@ exports.get = function (req) {
         cst.prototype.getClient = function () {
             var client = clientInSession[this.id];
             if (!client) {
-                var redirect_uri = 'http://' + settings.hostname;
+                var redirect_uri = 'http://' + settings.hostname + '/home/doubanback';
                 client = new DoubanClient(settings.doubanApiKey, settings.doubanSecret, redirect_uri, settings.scopes.join(','));
                 clientInSession[this.id] = client;
 
-                if(this.doubanToken){
+                if (this.doubanToken) {
                     client.loadFromDoubanToken(this.doubanToken);
                 }
             }
             return client;
         };
 
-        cst.prototype.setDoubanToken = function(doubanToken){
+        cst.prototype.setDoubanToken = function (doubanToken) {
             this.doubanToken = doubanToken;
         }
 

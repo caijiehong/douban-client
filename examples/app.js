@@ -1,6 +1,5 @@
 var express = require('express')
     , path = require('path')
-    , MongoStore = require('connect-mongo')(express)
     , session = require('./models/session');
 
 var settings = require('./settings.js');
@@ -17,11 +16,7 @@ app.configure(function () {
     app.use(express.methodOverride());
     app.use(express.cookieParser());
     app.use(express.session({
-        secret: settings.cookie_secret,
-        store: new MongoStore({
-            url: settings.dbUrl,
-            cookie: {  path: '/', maxAge: 60000000 * 5 }
-        })
+        secret: settings.cookie_secret
     }));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.logger('dev'));
@@ -43,6 +38,8 @@ function urlRouter(req, res, controller, action, id, ispost) {
     res.locals.testUserId2 = settings.testUserId2;
     res.locals.testUsername2 = settings.testUsername2
     res.locals.loginUserId = ses.doubanToken ? ses.doubanToken.douban_user_id : '';
+
+    res.locals.title = res.locals.title || 'douban sdk';
 
     controller = controller || 'home';
     action = action || 'index';
@@ -84,8 +81,6 @@ function urlRouter(req, res, controller, action, id, ispost) {
         res.status(404);
         res.render('layout', {error: err.stack});
     }
-
-    res.locals.title = res.locals.title || 'douban sdk by caijiehong';
 }
 
 app.get('/', function (req, res) {
@@ -106,4 +101,5 @@ exports.start = function () {
     var server = require('http').createServer(app);
 
     server.listen(settings.serverPort);
+    console.log('server is listening at ' + settings.serverPort);
 }

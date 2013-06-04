@@ -50,17 +50,17 @@ var api = [
     },
     {
         title: '获取用户日记列表',
-        api: 'GET /v2/note/user_created/:id',
-        sdk: 'client.note.list(id)',
+        api: 'GET /v2/note/user_created/:user_id',
+        sdk: 'client.note.list(user_id)',
         action: '/note/list',
-        params: [':id']
+        params: [':user_id']
     },
     {
         title: '获取喜欢的日记列表',
-        api: 'GET /v2/note/user_liked/:id',
-        sdk: 'client.note.liked_list(id)',
+        api: 'GET /v2/note/user_liked/:user_id',
+        sdk: 'client.note.liked_list(user_id)',
         action: '/note/liked_list',
-        params: [':id']
+        params: [':user_id']
     },
     {
         title: '获取回复列表',

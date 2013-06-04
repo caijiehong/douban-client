@@ -1,8 +1,8 @@
 var express = require('express')
     , path = require('path')
-    , session = require('./models/session');
-
-var settings = require('./settings.js');
+    , session = require('./models/session')
+    , settings = require('./settings.js')
+    , Db = require('mongodb').Db;
 var controllers = {};
 
 var app = express();
@@ -15,8 +15,14 @@ app.configure(function () {
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.cookieParser());
+
+    var MongoStore = require(settings.onBaidu ? 'connect-memcache' : 'connect-mongo')(express);
+
     app.use(express.session({
-        secret: settings.cookie_secret
+        secret: settings.cookie_secret,
+        store: new MongoStore({
+            url: settings.dbUrl
+        })
     }));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.logger('dev'));

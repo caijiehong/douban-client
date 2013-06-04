@@ -1,19 +1,28 @@
 {
-    "name": "douban-client",
-    "version": "0.1.0",
-    "description": "douban SDK in node.js",
-    "main": "server.js",
-    "scripts": {
-        "test": "node app.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/caijiehong/douban-client"
-    },
-    "keywords": [
-        "douban",
-        "sdk"
-    ],
-    "author": "caijiehong",
-    "license": "BSD"
+  "name": "douban-client",
+  "version": "0.1.0",
+  "description": "douban SDK in node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caijiehong/douban-client"
+  },
+  "keywords": [
+    "douban",
+    "sdk"
+  ],
+  "author": "caijiehong",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "15a579f174550417366c04e0d6bd19abe76d167e",
+  "bugs": {
+    "url": "https://github.com/caijiehong/douban-client/issues"
+  },
+  "directories": {
+    "example": "examples"
+  }
 }

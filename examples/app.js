@@ -1,14 +1,12 @@
 var express = require('express')
     , path = require('path')
     , session = require('./models/session')
-    , settings = require('./settings.js')
-    , Db = require('mongodb').Db;
+    , settings = require('./settings.js');
 var controllers = {};
 
 var app = express();
 
 app.configure(function () {
-    app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -16,14 +14,18 @@ app.configure(function () {
     app.use(express.methodOverride());
     app.use(express.cookieParser());
 
-    var MongoStore = require(settings.onBaidu ? 'connect-memcache' : 'connect-mongo')(express);
-
     app.use(express.session({
         secret: settings.cookie_secret,
-        store: new MongoStore({
-            url: settings.dbUrl
-        })
+        store: new require('connect-memcache')(express)()
     }));
+
+//    app.use(express.session({
+//        secret: settings.cookie_secret,
+//        store: new require('connect-mongo')(express)({
+//            url: settings.dbUrl
+//        })
+//    }));
+
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.logger('dev'));
     app.use(app.router);

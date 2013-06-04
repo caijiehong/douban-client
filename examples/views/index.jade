@@ -1,3 +1,105 @@
-extends layout
+extends template
 
-block navli
+block head
+    style(type='text/css').
+        pre {
+            min-height: 0px;
+        }
+
+
+block link
+    li.active
+        a(href='#')
+            i.icon-chevron-right
+            | 概述
+
+block content
+    .page-header
+        h2 这是一个豆瓣API的样例站点
+    p
+     code douban-client
+     | &nbsp是使用&nbsp
+     code Node.js
+     | &nbsp对豆瓣 API v2 接口的封装
+    p 目前已完成的接口有：
+
+    pre.prettyprint.linenums
+        ol.linenums
+            li
+                span 用户 User
+            li
+                span 广播 Miniblog
+            li
+                span 豆邮 Doumail
+            li
+                span 日记 Note
+            li
+                span 相册 Album
+            li
+                span 图片 Photo
+            li
+                span 读书 Book
+            li
+                span 电影 Movie
+            li
+                span 音乐 Music
+            li
+                span 线上活动 Online
+            li
+                span 同城活动 Event
+            li
+                span 论坛 Discussion
+            li
+                span 回复 Comment
+    p 安装
+    pre
+        code npm install douban-client
+    p OAuth 2.0 认证
+    pre
+        code.
+            var DoubanClient = require('douban-client');
+
+            API_KEY = 'your api key'
+            API_SECRET = 'your api secret'
+
+            // 在 OAuth 2.0 中，
+            // 获取权限需要指定相应的 scope，请注意!!
+            SCOPE = 'douban_basic_common,shuo_basic_r,shuo_basic_w'
+
+            var client = new DoubanClient(API_KEY, API_SECRET, your_redirect_uri, SCOPE)
+
+            // 以下方式 2 选 1:
+            // 1. 引导用户授权
+            process.stdout.write('Go to the following link in your browser:\n');
+            process.stdout.write(client.authorize_url() + '\n');
+            process.stdout.write('Enter the verification code:\n');
+
+            process.stdin.on('data', function(chunk) {
+                code = chunk;
+            client.auth_with_code(code);
+            });
+
+            // 2. 如果有之前有 token，则可以
+            client.auth_with_token(token)
+
+            // Token Code
+            token_code = client.token_code
+
+            // Refresh Token
+            // 请注意：`refresh_token_code` 值仅可在授权完成时获取(即在 `auth_with_code`, `auth_with_password` 之后)
+            refresh_token_code = client.refresh_token_code
+            client.refresh_token(refresh_token_code) # refresh token
+    p 至此，已经完成 OAuth 2.0 授权
+    p 如何调用：
+    pre
+        code.
+            // 所有接口使用异步模式，返回一个 events.EventEmitter 事件对象
+            // 接口返回数据时，会触发 data 事件
+
+            var event = client.user.get(id);
+            event.on('data', function(err, data){
+            //发生异常时会将异常放入err, 此时 data == null
+            if(!err){
+            console.log(data);
+                }
+            });

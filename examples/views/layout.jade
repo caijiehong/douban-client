@@ -1,153 +1,41 @@
-!!! transitional
-html
-    head
-        meta(charset='utf-8')
-        title #{title}
-        meta(name='viewport', content='width=device-width, initial-scale=1.0')
-        link(rel='stylesheet', href='../css/bootstrap.min.css')
+extends template
 
-        style(type='text/css').
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-            .nav-collapse li a{
-                font-size:17px;
-                font-weight:bold;
-            }
-            .footer {
-                text-align: center;
-                padding: 30px 0;
-                margin-top: 70px;
-                border-top: 1px solid #e5e5e5;
-                background-color: #f5f5f5;
-            }
-            .footer-links {
-                margin: 10px 0;
-            }
-            .footer-links li {
-                display: inline;
-                padding: 0 2px;
-            }
-            section{
-                margin-bottom: 150px;
-            }
-            pre{
-                min-height: 150px;
-            }
-            .icon-chevron-right{
-                float:right
-            }
-            .navbar-form input{
-                width:100px;
-            }
-            .navbar-form input,button{
-                margin-left:5px
-            }
-            .prettyprint.linenums {
-                -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
-                -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
-                box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
-            }
-            ol.linenums li {
-                padding-left: 12px;
-                color: #bebec5;
-                line-height: 20px;
-                text-shadow: 0 1px 0 #fff;
-            }
-            ol.linenums li span{
-                color:#1e347b;
-            }
+block link
+    - api.forEach(function(item){
+        li
+            a(href='#')
+                i.icon-chevron-right
+                | #{item.title}
+    - })
 
-        link(href='../css/bootstrap-responsive.min.css', rel='stylesheet')
-        script(src='/js/jquery-2.0.2.min.js')
-        script(src='/js/bootstrap.min.js')
-        script(src='/js/douban.js')
-    body
-        .navbar.navbar-inverse.navbar-fixed-top
-            .navbar-inner
-                .container-fluid
-                    button.btn.btn-navbar(type='button', data-toggle='collapse', data-target='.nav-collapse')
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-                    a.brand(href='#') douban-client
-                    .nav-collapse.collapse
-                        ul.nav.pull-right
-                            - if(doubanToken)
-                                li
-                                    a.navbar-link(href='http://www.douban.com/people/#{doubanToken.douban_user_id}/',target='blank') #{doubanToken.douban_user_name}
-                                li
-                                    button.btn(onclick='window.location="/home/logout"') 登出
-                            - else
-                                li
-                                    a(href='#{authorize_url}',style='background-image:url(/img/login_with_douban_24.png);background-repeat:no-repeat;width:120px;height:24px')
-                        ul#ulNav.nav
-                            li.user
-                                a(href='/user/index') 用户
-                            li.miniblog
-                                a(href='/miniblog/index') 广播
-                            li.doumail
-                                a(href='/doumail/index') 豆邮
-                            li.note
-                                a(href='/note/index') 日记
-                            li.album
-                                a(href='/album/index') 相册
-                            li.photo
-                                a(href='/photo/index') 图片
-                            li.book
-                                a(href='/book/index') 读书
-                            li.movie
-                                a(href='/movie/index') 电影
-                            li.music
-                                a(href='/music/index') 音乐
-                            li.online
-                                a(href='/online/index') 线上活动
-                            li.event
-                                a(href='/event/index') 同城活动
-                            li.discussion
-                                a(href='/discussion/index') 论坛
-        .container
-            .row
-                .span3.bs-docs-sidebar
-                    ul#ulLink.nav.nav-list.bs-docs-sidenav.affix(style='min-width:150px')
-                        - api.forEach(function(item){
-                            li
-                                a(href='#')
-                                    i.icon-chevron-right
-                                    | #{item.title}
-                        - })
-                .span9
-                    - api.forEach(function(item){
-                    -    var loginclass = item.login ? 'login' : '';
-                        section(class=loginclass)
-                            .page-header
-                                h2 #{item.title}
-                            p
-                                code
-                                    strong API
-                                    |&nbsp #{item.api}
-                            p
-                                code
-                                    strong SDK
-                                    |&nbsp #{item.sdk}
-                            pre.prettyprint.linenums
-                                .navbar
-                                    .navbar-inner
-                                        form.navbar-form.pull-right(action='#{item.action}')
-                                            - item.params.forEach(function(param){
-                                                input(type='text',placeholder="#{param}")
-                                            - })
-                                            button.btn(type='submit') 试一下
-                                .progress.progress-striped.active(style='width:200px;margin:0 auto;display:none')
-                                    .bar(style='width:100%')
-                                ol.linenums
-                    - })
-    footer.footer
-        .container
-            ul.footer-links
-                li
-                    a(href='https://github.com/caijiehong') caijiehong
+block content
+    - api.forEach(function(item){
+    -    var loginclass = item.login ? 'login' : '';
+        section(class=loginclass)
+            .page-header
+                h2 #{item.title}
+            p
+                code
+                    strong API
+                    | &nbsp #{item.api}
+            p
+                code
+                    strong SDK
+                    | &nbsp #{item.sdk}
+            pre.prettyprint.linenums
+                .navbar
+                    .navbar-inner
+                        form.navbar-form.pull-right(action='#{item.action}')
+                            - item.params.forEach(function(param){
+                                input(type='text',placeholder="#{param}")
+                            - })
+                            button.btn(type='submit') 试一下
+                .progress.progress-striped.active(style='width:200px;margin:0 auto;display:none')
+                    .bar(style='width:100%')
+                ol.linenums
+    - })
+
+block hidd
     input#hidTestUserId1(type='hidden', value='#{testUserId1}')
     input#hidTestUserId2(type='hidden', value='#{testUserId2}')
     input#hidTestUsername1(type='hidden', value='#{testUsername1}')

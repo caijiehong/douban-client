@@ -3,20 +3,7 @@ var session = require('../models/session.js')
 
 exports.index = {
     get: function (req, res) {
-        var code = req.param('code');
-        if (code) {
-            var client = session.get(req).getClient();
-
-            client.auth_with_code(code, function (err, doubanToken) {
-                if (!err) {
-                    session.get(req).setDoubanToken(doubanToken);
-                    res.redirect('/user/index');
-                }
-            });
-        }
-        else {
-            res.redirect('/user/index');
-        }
+        res.render('index');
     }
 };
 

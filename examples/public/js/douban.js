@@ -33,7 +33,7 @@ $(document).ready(function () {
         var item = $(this);
         item.attr('id', 'section' + index);
         if (item.hasClass('login') && !loginUserId) {
-            item.find('ol.linenums').html('<div class="alert alert-error">请先登录!</div>');
+            item.find('ol.linenums').html('<div class="alert alert-error">请先使用豆瓣帐号登录!</div>');
             item.find('button').attr('disabled', true);
         } else {
             item.find('form').submit(function () {

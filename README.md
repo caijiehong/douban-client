@@ -1,6 +1,6 @@
 ## douban-client
 
-douban-client 是使用Node.js对豆瓣 API v2 接口进行了一个简单封装。
+douban-client 是使用 Node.js 对豆瓣 API v2 接口的封装
 
 接口有：
 ``` 
@@ -8,6 +8,15 @@ douban-client 是使用Node.js对豆瓣 API v2 接口进行了一个简单封装
 * 广播 Miniblog
 * 豆邮 Doumail
 * 日记 Note
+* 相册 Album
+* 图片 Photo
+* 读书 Book
+* 电影 Movie
+* 音乐 Music
+* 线上活动 Online
+* 同城活动 Event
+* 论坛 Discussion
+* 回复 Comment
 ```
 
 ### 安装
@@ -59,7 +68,7 @@ client.refresh_token(refresh_token_code) # refresh token
 
 #### Douban SDK
 
-__概述__
+__如何调用：__
 ```
 // 所有接口使用异步模式，返回一个 events.EventEmitter 事件对象
 // 接口返回数据时，会触发 data 事件

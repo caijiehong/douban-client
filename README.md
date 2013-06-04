@@ -2,10 +2,9 @@
 
 douban-client 是使用 Node.js 对豆瓣 API v2 接口的封装
 
-以下地址是 examples 托管于 BAE 的在线站点
-<http://doubannode.duapp.com/>
+欢迎访问托管于 BAE 的样例站点: <http://doubannode.duapp.com/>
 
-接口有：
+实现的接口有：
 ``` 
 * 用户 User
 * 广播 Miniblog

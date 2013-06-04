@@ -16,15 +16,10 @@ app.configure(function () {
 
     app.use(express.session({
         secret: settings.cookie_secret,
-        store: new require('connect-memcache')(express)()
+        store: new require('connect-mongo')(express)({
+            url: settings.dbUrl
+        })
     }));
-
-//    app.use(express.session({
-//        secret: settings.cookie_secret,
-//        store: new require('connect-mongo')(express)({
-//            url: settings.dbUrl
-//        })
-//    }));
 
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.logger('dev'));

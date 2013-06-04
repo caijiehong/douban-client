@@ -1,7 +1,7 @@
 module.exports = {
-    doubanApiKey: '0ce9be6dea250deb26bd3b49be6f29c1',
-    doubanSecret: 'a3910895fc66a70f',
-    hostname: 'doubannode.duapp.com',
+    doubanApiKey: 'your douban api key',
+    doubanSecret: 'your douban api secrect',
+    hostname: 'www.yourwebsite.com',
     serverPort: 3000,
     scopes: [
         'shuo_basic_r',

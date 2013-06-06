@@ -11,9 +11,11 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
     var _redirectUri = redirect_uri;
     var _scope = scope;
     var client = new Client(key, secrect, AUTH_HOST, API_HOST, AUTHORIZE_URL, TOKEN_URL);
-    var access_token = null;
+    var access_token = new Access_token('', 0, '');;
     var _this = this;
     this.doubanToken = null;
+
+    setup();
 
     this.authorize_url = function (redirectUri, scope) {
         return client.authorize_url(redirectUri || _redirectUri, scope || _scope);
@@ -39,9 +41,13 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
     };
 
     this.loadFromDoubanToken = loadFromDoubanToken = function (doubanToken, token, expires, refreshToken, userId, username) {
-        _this.doubanToken = doubanToken;
+        this.doubanToken = doubanToken;
         access_token = new Access_token(doubanToken.access_token, doubanToken.expires_in, doubanToken.refresh_token);
 
+        setup();
+    };
+
+    function setup(){
         _this.album = new require('./api/album')(access_token, _apiKey);
         _this.book = new require('./api/book')(access_token, _apiKey);
         _this.discussion = new require('./api/discussion')(access_token, _apiKey);

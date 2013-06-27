@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Event(token) {
-    var base = new DoubanApiBase(token);
+function Event(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取同城活动
     base.get = function (id) {

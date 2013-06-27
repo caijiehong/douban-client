@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Music(token) {
-    var base = new DoubanApiBase(token);
+function Music(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取音乐信息
     base.get = function (id) {

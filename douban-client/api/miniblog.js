@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Miniblog(token) {
-    var base = new DoubanApiBase(token);
+function Miniblog(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //当前用户Timeline
     base.home_timeline = function (count) {

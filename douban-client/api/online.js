@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Online(token) {
-    var base = new DoubanApiBase(token);
+function Online(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取一条线上活动
     base.get = function (id) {

@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Album(token) {
-    var base = new DoubanApiBase(token);
+function Album(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取一个相册
     base.get = function (id) {

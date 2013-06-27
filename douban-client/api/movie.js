@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Movie(token) {
-    var base = new DoubanApiBase(token);
+function Movie(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取一部电影信息
     base.get = function (id) {

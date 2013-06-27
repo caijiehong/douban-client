@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Discussion(token) {
-    var base = new DoubanApiBase(token);
+function Discussion(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取帖子
     base.get = function (id) {

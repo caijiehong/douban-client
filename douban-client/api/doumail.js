@@ -1,8 +1,11 @@
 var DoubanApiBase = require('./base')
     , util = require('util');
 
-function Doumail(token) {
-    var base = new DoubanApiBase(token);
+function Doumail(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取一封豆邮
     base.get = function (id) {

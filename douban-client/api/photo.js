@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Photo(token) {
-    var base = new DoubanApiBase(token);
+function Photo(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取一张图片
     base.get = function (id) {

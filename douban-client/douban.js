@@ -48,18 +48,19 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
     };
 
     function setup(){
-        _this.album = new require('./api/album')(access_token, _apiKey);
-        _this.book = new require('./api/book')(access_token, _apiKey);
-        _this.discussion = new require('./api/discussion')(access_token, _apiKey);
-        _this.doumail = new require('./api/doumail')(access_token, _apiKey);
-        _this.event = new require('./api/event')(access_token, _apiKey);
-        _this.miniblog = new require('./api/miniblog')(access_token, _apiKey);
-        _this.movie = new require('./api/movie')(access_token, _apiKey);
-        _this.music = new require('./api/music')(access_token, _apiKey);
-        _this.note = new require('./api/note')(access_token, _apiKey);
-        _this.online = new require('./api/online')(access_token, _apiKey);
-        _this.photo = new require('./api/photo')(access_token, _apiKey);
-        _this.user = new require('./api/user')(access_token, _apiKey);
+        var base = new require('./api/base')(access_token, _apiKey);
+        _this.album = new require('./api/album')(base);
+        _this.book = new require('./api/book')(base);
+        _this.discussion = new require('./api/discussion')(base);
+        _this.doumail = new require('./api/doumail')(base);
+        _this.event = new require('./api/event')(base);
+        _this.miniblog = new require('./api/miniblog')(base);
+        _this.movie = new require('./api/movie')(base);
+        _this.music = new require('./api/music')(base);
+        _this.note = new require('./api/note')(base);
+        _this.online = new require('./api/online')(base);
+        _this.photo = new require('./api/photo')(base);
+        _this.user = new require('./api/user')(base);
     }
 
     return this;

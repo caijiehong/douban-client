@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function Note(token) {
-    var base = new DoubanApiBase(token);
+function Note(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     //获取一篇日记
     base.get = function (id, format) {

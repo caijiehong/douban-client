@@ -1,7 +1,10 @@
 var DoubanApiBase = require('./base');
 
-function User(token, apiKey) {
-    var base = new DoubanApiBase(token, apiKey);
+function User(douBase) {
+    var f = function(){ }
+    f.prototype = douBase
+
+    var base = new f();
 
     base.me = function () {
         return this._get('/v2/user/~me', null);

@@ -11,7 +11,8 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
     var _redirectUri = redirect_uri;
     var _scope = scope;
     var client = new Client(key, secrect, AUTH_HOST, API_HOST, AUTHORIZE_URL, TOKEN_URL);
-    var access_token = new Access_token('', 0, '');;
+    var access_token = new Access_token('', 0, '');
+    ;
     var _this = this;
     this.doubanToken = null;
 
@@ -25,7 +26,9 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
         client.get_token(code, _redirectUri, function (err, res) {
             console.log('doubanToken', res);
             loadFromDoubanToken(res);
-            onauthed(err, res);
+            if (onauthed) {
+                onauthed(err, res);
+            }
         });
     };
 
@@ -47,7 +50,7 @@ function DoubanClient(key, secrect, redirect_uri, scope) {
         setup();
     };
 
-    function setup(){
+    function setup() {
         var base = new require('./api/base')(access_token, _apiKey);
         _this.album = new require('./api/album')(base);
         _this.book = new require('./api/book')(base);

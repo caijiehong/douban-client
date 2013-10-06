@@ -50,7 +50,9 @@ process.stdout.write('Enter the verification code:\n');
 
 process.stdin.on('data', function(chunk) {
     code = chunk;
-    client.auth_with_code(code);
+    client.auth_with_code(code, function(err, doubanToken){
+        console.log('this is your ' + doubanToken);
+    });
 });
 
 # 2. 如果有之前有 token，则可以

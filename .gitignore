@@ -1,0 +1,15 @@
+*.DS_store
+*.log
+*.sublime-project
+*.sublime-workspace
+
+node_modules
+app/components
+dist
+static
+test/output
+gzip
+.sass-cache
+.tmp
+bower_components
+

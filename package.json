@@ -24,5 +24,8 @@
   },
   "directories": {
     "example": "examples"
+  },
+  "dependencies": {
+    "curlrequest": "^0.5.7"
   }
 }

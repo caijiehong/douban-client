@@ -1,4 +1,4 @@
-var https = require('https')
+var curl = require('curlrequest')
     , Access_token = require('./access_token')
     , url = require('url');
 
@@ -33,37 +33,28 @@ function Client(key, secret, authHost, apiHost, authorizeUrl, tokenUrl) {
             code: code
         };
 
-        var options = {
-            hostname: _authHost,
-            path: url.format({pathname: _tokenUrl, query: query}),
-            method: 'POST',
-            headers: {
-                'Content-Type': "application/x-www-form-urlencoded",
-                'content-length': 0
+        var query = {
+          'grant_type': 'authorization_code',
+          'code': code,
+          'client_id': _apiKey,
+          'client_secret': _secret,
+          'redirect_uri': redirectUrl
+        }
+
+        curl.request({
+          url: 'https://' + _authHost + _tokenUrl,
+          method: 'POST',
+          data: query
+        }, function(err, parts) {
+            parts = parts.split('\r\n')
+            var data = JSON.parse(parts.pop())
+
+            if (err) {
+                onauthed(err, null);
+            } else {
+                onauthed(null, data);
             }
-        };
-
-        var revData = '';
-        var req = https.request(options, function (res) {
-            res.on('data', function (d) {
-                revData += d.toString('utf8');
-            });
-            res.on('end', function () {
-
-                var json = null;
-                try {
-                    json = JSON.parse(revData);
-                } catch (err) {
-                    onauthed(err, null);
-                    return;
-                }
-                onauthed(null, json);
-            });
         });
-        req.on('error', function (e) {
-            onauthed(e, null);
-        });
-        req.end();
     };
 
     return this;
